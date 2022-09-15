@@ -23,3 +23,27 @@
 - [https://babeljs.io/setup#installation](https://babeljs.io/setup#installation)
 - [https://www.npmjs.com/package/morgan](https://www.npmjs.com/package/morgan)
 - [https://www.npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon)
+
+# mvc 구조
+```javascript
+import express from "express";
+import morgan from "morgan";
+
+const app = express();
+
+// middleware
+const logger = morgan("dev");
+app.use(logger);
+
+// controller
+const home = (req, res) => res.send("See Home");
+
+// router
+const globalRouter = express.Router();
+globalRouter.get("/", home);
+app.use("/", globalRouter);
+
+// listen
+const handleListening = () => console.log(`Server listening on http://localhost:${PORT} 🚀`)
+app.listen(PORT, handleListening);
+```
